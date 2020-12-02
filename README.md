@@ -9,7 +9,6 @@ The easiest way to build and run the **server** is to use the maven:
 
 $ mvnw spring-boot:run
 
-The command should build war **atm-locator.war** in target folder
 
 ###War Deployment
 project is already using embedded tomcat 7
