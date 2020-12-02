@@ -1,0 +1,82 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon"
+	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico" />
+
+<title>Please Signin</title>
+
+<link rel="canonical"
+	href="https://getbootstrap.com/docs/4.0/examples/sign-in/" />
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" th:href="@{/css/login/login.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body class="text-center">
+	<form class="form-signin needs-validation" th:action="@{/login}"
+		method="post" novalidate="novalidate">
+		<img class="mb-4"
+			src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+			alt="" width="72" height="72"/>
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<div th:if="${param.error}">
+			<div class="alert alert-danger">Invalid username and password.</div>
+		</div>
+		<div th:if="${param.logout}">
+			<div class="alert alert-info">You have been logged out.</div>
+		</div>
+		<label for="username" class="sr-only">Username</label> <input
+			type="text" id="username" name="username" class="form-control"
+			placeholder="Username" required="required" autofocus="required"/>
+		<div class="invalid-feedback">Please fill out this field.</div>
+		<label for="password" class="sr-only">Password</label> <input
+			type="password" id="password" class="form-control"
+			placeholder="Password" name="password" required="required"/>
+		<div class="invalid-feedback">Please fill out this field.</div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+			in</button>
+		<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+	</form>
+	<script>
+		// Disable form submissions if there are invalid fields
+		(function() {
+			'use strict';
+			window.addEventListener('load',
+					function() {
+						// Get the forms we want to add validation styles to
+						var forms = document
+								.getElementsByClassName('needs-validation');
+						// Loop over them and prevent submission
+						var validation = Array.prototype.filter.call(forms,
+								function(form) {
+									form.addEventListener('submit', function(
+											event) {
+										if (form.checkValidity() === false) {
+											event.preventDefault();
+											event.stopPropagation();
+										}
+										form.classList.add('was-validated');
+									}, false);
+								});
+					}, false);
+		})();
+	</script>
+</body>
+</html>
