@@ -58,5 +58,17 @@ public class AtmLocApiControllerTest {
 		String resultCZ = result.getResponse().getContentAsString();
 		assertNotNull(resultCZ);
 	}
+	
+	
+	@Test
+	@WithMockUser
+	public void testGetAtmsNoAtmAvailable() throws Exception {
+		MvcResult result = mockMvc.perform(
+				MockMvcRequestBuilders.get("/api/locator/atms?page=0&size=10&city=cccc").with(user(TEST_USER_ID))
+						.with(csrf()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound()).andReturn();
+		String resultCZ = result.getResponse().getContentAsString();
+		assertNotNull(resultCZ);
+	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.atmloc.dto.AtmLocDto;
+import com.example.atmloc.exception.ResourceNotFoundExcetion;
 
 @Service
 public class AtmLocServiceImpl implements AtmLocService {
@@ -35,6 +36,9 @@ public class AtmLocServiceImpl implements AtmLocService {
 					.skip((long) (pageable.getPageNumber() * pageable.getPageSize()))
 					.limit((long) (pageable.getPageSize())).collect(Collectors.toList());
 			page = PageableExecutionUtils.getPage(newAtms, pageable, () -> allAtmLocs.size());
+		}
+		if(page == null || page.getContent() == null || page.getContent().size()==0) {
+			throw new ResourceNotFoundExcetion("no atm available");
 		}
 		return page;
 	}
